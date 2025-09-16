@@ -1,71 +1,30 @@
-# Capstone Project Hub: The "Office Apocalypse" Algorithm
+Capstone Project Hub - README
+This document provides an overview of the Capstone Project Hub (dashboard.html), an all-in-one interactive dashboard created to manage, document, and showcase our capstone project, "The Office Apocalypse Algorithm."
 
-## Overview
+What is the Project Hub?
+The Project Hub is a single, self-contained HTML file that functions as a complete website for our project. It is designed to be the central source of truth for our team and a comprehensive showcase for our professor and other stakeholders. It brings together project management, documentation, and interactive demonstrations into one clean interface.
 
-This project develops a machine learning model to predict the likelihood of long-term vacancy for commercial office buildings in New York City, addressing the "office apocalypse" caused by the shift to remote and hybrid work post-COVID-19.
+Key Features
+The Hub is organized into several tabs, each serving a specific purpose:
 
-## Problem Statement
+Interactive Dashboard: The core project management tool. Here, we can track all tasks across different project phases, assign them to team members, and monitor our progress in real-time with automatically updating progress bars.
 
-The COVID-19 pandemic has fundamentally altered work culture, popularizing remote and hybrid models that significantly reduce the demand for traditional office space in NYC. This threatens to create a "commercial vacancy crisis," potentially leading to billions of dollars in lost property value, decreased city tax revenue, and the decay of business districts that rely on office worker foot traffic.
+Project Documentation: Contains all essential project documents, including the official Project Overview Statement (POS), team member roles, and links to all datasets and foundational research papers.
 
-## Goal
+Technical Methodology: A detailed blueprint of our data science workflow, from data integration and feature engineering to our model training and evaluation strategy.
 
-To develop a robust machine learning model that accurately predicts the likelihood of long-term vacancy for commercial office buildings in NYC, providing actionable insights for urban planning and real estate strategy.
+Live Model Demo: An interactive simulator that allows users to input hypothetical building characteristics and receive a live vacancy risk prediction, demonstrating the core functionality of our algorithm.
 
-## Key Features
+Final Results: A showcase for the project's final outcomes, including our champion model's performance metrics, a geospatial heatmap of our findings, and a summary of our key conclusions.
 
-- **Interactive Dashboard**: Track project progress across multiple phases with dynamic task management.
-- **Project Documentation**: Comprehensive overview of methodology, datasets, and team information.
-- **Model Demo**: Interactive tool to simulate vacancy risk predictions based on building features.
-- **Results Visualization**: Showcase final model performance and key insights.
+GitHub Repository: A direct link to the project's public code repository, ensuring transparency and reproducibility.
 
-## Datasets Used
+How to Use
+Simply open the dashboard.html file in any modern web browser (like Chrome, Firefox, or Edge). No installation or special software is required.
 
-- **PLUTO and MapPLUTO**: Building-level data including year built, zoning, and square footage.
-- **ACRIS**: Property transaction data for financial history.
-- **DOB Permit Issuance**: Building permits signaling investment and renovation.
-- **Storefront Vacancy Data**: Ground-truth labels for storefront vacancy.
-- **MTA Turnstile Data**: Proxy for neighborhood economic activity and foot traffic.
-- **NYC Legally Operating Businesses**: Insights into commercial ecosystems.
+Important Note on Data Persistence
+The dashboard is designed to save your progress (checked boxes, status changes, etc.) automatically. This information is stored in your browser's localStorage.
 
-## Methodology
+This means: Your progress is saved on the computer and in the browser where you make the changes.
 
-1. **Data Acquisition & Integration**: Merge data from multiple sources using BBL identifiers.
-2. **Feature Engineering**: Create 20+ engineered features capturing building age, transactional history, geospatial factors, etc.
-3. **Modeling**: Train baseline (Logistic Regression) and advanced models (XGBoost, Random Forest).
-4. **Evaluation**: Use temporal train-test split with AUC, Precision, and Recall metrics.
-5. **Interpretation**: Apply SHAP for model explainability.
-
-## Team
-
-- **Ibrahim Denis Fofanah**: Project Lead & Data Scientist
-- **Bright Arowny Zaman**: Data Lead
-- **Jeevan Hemanth Yendluri**: Modeling Lead
-
-## Usage
-
-This is a static HTML application. Simply open `index.html` in a web browser to explore the dashboard.
-
-## Repository Structure
-
-- `index.html`: Main application file
-- `presentattion/index.html`: Presentation slides
-- Other HTML files: Backups and variations
-
-## Technologies Used
-
-- HTML5, CSS3 (Tailwind CSS)
-- JavaScript (Vanilla JS)
-- Git for version control
-
-## License
-
-This project is for educational purposes as part of a Master's degree capstone project.
-
-## Contact
-
-For questions or collaboration, please reach out to the team members listed above.
-
----
-
-*This project is part of the Master of Data Science program at Peace University.*
+This does NOT mean: The progress is automatically synced with your teammates. Each team member's dashboard will track their own view of the project's status. It is a tool to aid in personal and team organization.
