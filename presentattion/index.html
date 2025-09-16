@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capstone Project Selection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .slide {
+            transition: opacity 0.5s ease-in-out;
+            min-height: 80vh;
+        }
+        .slide-content {
+            max-width: 900px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- Slide Container -->
+    <main class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden">
+        
+        <!-- Slide 1: Title -->
+        <section id="slide-0" class="slide flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-blue-50 to-indigo-100">
+            <div class="slide-content">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Capstone Project Selection</h1>
+                <p class="mt-4 text-xl md:text-2xl text-indigo-600">Team Meeting & Proposal Review</p>
+                <div class="mt-8 border-t border-indigo-200 pt-6">
+                    <p class="text-lg text-gray-600">Peace University | Master of Data Science</p>
+                    <p class="mt-2 text-md text-gray-500">September 10, 2025</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Agenda -->
+        <section id="slide-1" class="slide hidden flex-col items-center justify-center p-8 md:p-12">
+            <div class="slide-content w-full">
+                <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Today's Goal</h2>
+                <p class="text-xl text-center text-gray-600 mb-10">To discuss three high-impact capstone proposals and select one to pursue for our Master's degree.</p>
+                <div class="space-y-4 text-lg">
+                    <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                        <span class="text-2xl font-bold text-indigo-500 mr-4">1.</span>
+                        <p class="text-gray-700">Review three distinct project proposals: core idea, impact, and technical plan.</p>
+                    </div>
+                    <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                        <span class="text-2xl font-bold text-indigo-500 mr-4">2.</span>
+                        <p class="text-gray-700">Discuss pros, cons, feasibility, and required skills for each option.</p>
+                    </div>
+                    <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                        <span class="text-2xl font-bold text-indigo-500 mr-4">3.</span>
+                        <p class="text-gray-700">Align as a team on the project that best fits our collective goals and passions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Project 1 Overview -->
+        <section id="slide-2" class="slide hidden flex-col items-center justify-center p-8 md:p-12 bg-gray-50">
+            <div class="slide-content w-full text-center">
+                <h3 class="text-sm font-semibold text-indigo-500 uppercase tracking-widest">PROPOSAL 1</h3>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">The Congestion Pricing Verdict</h2>
+                <div class="my-6 flex justify-center text-indigo-600">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
+                </div>
+                <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+                    A year later, did NYC's policy work as promised, or did it create unintended consequences for the outer boroughs?
+                </p>
+                <p class="mt-4 text-lg font-semibold text-green-700">Why it's a winner: Extremely high public relevance. A perfect blend of data science and public policy analysis.</p>
+            </div>
+        </section>
+        
+        <!-- Slide 4: Project 1 Deep Dive -->
+        <section id="slide-3" class="slide hidden flex-col items-center justify-center p-8 md:p-12">
+            <div class="slide-content w-full">
+                <h3 class="text-3xl font-bold text-center mb-8">Proposal 1: Technical Deep Dive</h3>
+                <div class="grid md:grid-cols-2 gap-8 text-left">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-indigo-700">Data Sources</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                            <li>NYC Open Data (Traffic, Air Quality, 311)</li>
+                            <li>MTA Turnstile & OMNY Data</li>
+                            <li>US Census Data</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-indigo-700">Core Techniques</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                            <li><strong>Causal Inference (Diff-in-Diff)</strong></li>
+                            <li>Time-Series Forecasting (ARIMA)</li>
+                            <li>Geospatial Analysis (GIS)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                        <h4 class="font-bold text-lg mb-2 text-green-800">Pros</h4>
+                        <ul class="list-disc list-inside space-y-1 text-green-700">
+                            <li>High-quality public data is available</li>
+                            <li>Advanced methodology is great for resumes</li>
+                            <li>Huge potential for media attention</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                        <h4 class="font-bold text-lg mb-2 text-red-800">Cons</h4>
+                        <ul class="list-disc list-inside space-y-1 text-red-700">
+                            <li>Causal inference is complex to do right</li>
+                            <li>Results could be politically sensitive</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Project 2 Overview -->
+        <section id="slide-4" class="slide hidden flex-col items-center justify-center p-8 md:p-12 bg-gray-50">
+            <div class="slide-content w-full text-center">
+                <h3 class="text-sm font-semibold text-indigo-500 uppercase tracking-widest">PROPOSAL 2</h3>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">The "Office Apocalypse" Algorithm</h2>
+                <div class="my-6 flex justify-center text-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                </div>
+                <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+                    Can we build an ML model to predict which commercial buildings are at the highest risk of long-term vacancy?
+                </p>
+                <p class="mt-4 text-lg font-semibold text-green-700">Why it's a winner: Solves a multi-billion dollar problem. A tangible, predictive tool that showcases modern ML skills.</p>
+            </div>
+        </section>
+
+        <!-- Slide 6: Project 2 Deep Dive -->
+        <section id="slide-5" class="slide hidden flex-col items-center justify-center p-8 md:p-12">
+            <div class="slide-content w-full">
+                <h3 class="text-3xl font-bold text-center mb-8">Proposal 2: Technical Deep Dive</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-indigo-700">Data Sources</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                            <li>NYC PLUTO Building Data</li>
+                            <li>Commercial Real Estate APIs (Zillow, etc.)</li>
+                            <li>MTA Data (as a foot-traffic proxy)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-indigo-700">Core Techniques</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                            <li><strong>Supervised ML (XGBoost)</strong></li>
+                            <li>Advanced Feature Engineering</li>
+                            <li>Interactive Dashboard/Visualization</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                        <h4 class="font-bold text-lg mb-2 text-green-800">Pros</h4>
+                        <ul class="list-disc list-inside space-y-1 text-green-700">
+                            <li>Excellent portfolio piece</li>
+                            <li>Very relevant to business/tech sectors</li>
+                            <li>Creates a tangible, useful tool</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                        <h4 class="font-bold text-lg mb-2 text-red-800">Cons</h4>
+                        <ul class="list-disc list-inside space-y-1 text-red-700">
+                            <li><strong>High risk: Data acquisition is difficult</strong></li>
+                            <li>Success depends on finding good proxies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Project 3 Overview -->
+        <section id="slide-6" class="slide hidden flex-col items-center justify-center p-8 md:p-12 bg-gray-50">
+            <div class="slide-content w-full text-center">
+                <h3 class="text-sm font-semibold text-indigo-500 uppercase tracking-widest">PROPOSAL 3</h3>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">AI for Predicting Hate Crimes</h2>
+                 <div class="my-6 flex justify-center text-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+                    Can we use NLP on social media to analyze hate speech and forecast which neighborhoods are at a higher risk of a real-world incident?
+                </p>
+                <p class="mt-4 text-lg font-semibold text-green-700">Why it's a winner: Highest potential for social impact. Uses state-of-the-art AI for a noble and highly relevant purpose.</p>
+            </div>
+        </section>
+        
+        <!-- Slide 8: Project 3 Deep Dive -->
+        <section id="slide-7" class="slide hidden flex-col items-center justify-center p-8 md:p-12">
+            <div class="slide-content w-full">
+                <h3 class="text-3xl font-bold text-center mb-8">Proposal 3: Technical Deep Dive</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-indigo-700">Data Sources</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                            <li>NYPD Hate Crimes Data</li>
+                            <li>Social Media APIs (X/Twitter, Reddit)</li>
+                            <li>ACLU / ADL Reports</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-indigo-700">Core Techniques</h4>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                            <li><strong>Natural Language Processing (BERT)</strong></li>
+                            <li>Hate Speech Classification</li>
+                            <li>Time-Series Forecasting</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                        <h4 class="font-bold text-lg mb-2 text-green-800">Pros</h4>
+                        <ul class="list-disc list-inside space-y-1 text-green-700">
+                            <li>Incredibly meaningful and impactful work</li>
+                            <li>Uses cutting-edge NLP models</li>
+                            <li>Strong potential for positive media</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                        <h4 class="font-bold text-lg mb-2 text-red-800">Cons</h4>
+                        <ul class="list-disc list-inside space-y-1 text-red-700">
+                            <li><strong>Highest risk: Major ethical concerns</strong></li>
+                            <li>Social media API access can be difficult</li>
+                            <li>Requires deep NLP expertise</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Decision Framework -->
+        <section id="slide-8" class="slide hidden flex-col items-center justify-center p-8 md:p-12">
+            <div class="slide-content w-full">
+                <h2 class="text-3xl font-bold text-center text-indigo-700 mb-10">How We'll Decide</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-gray-100 rounded-xl">
+                        <h3 class="text-xl font-bold mb-2">Impact</h3>
+                        <p class="text-gray-600">Which project do we believe will make the biggest and most meaningful splash?</p>
+                    </div>
+                    <div class="p-6 bg-gray-100 rounded-xl">
+                        <h3 class="text-xl font-bold mb-2">Feasibility</h3>
+                        <p class="text-gray-600">Which are we most confident we can successfully complete given data and time constraints?</p>
+                    </div>
+                    <div class="p-6 bg-gray-100 rounded-xl">
+                        <h3 class="text-xl font-bold mb-2">Skills</h3>
+                        <p class="text-gray-600">Which best aligns with the skills we have now and the skills we want to learn?</p>
+                    </div>
+                    <div class="p-6 bg-gray-100 rounded-xl">
+                        <h3 class="text-xl font-bold mb-2">Passion</h3>
+                        <p class="text-gray-600">Which idea personally excites our team the most?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Discussion -->
+        <section id="slide-9" class="slide hidden flex-col items-center justify-center text-center p-8 md:p-12 bg-gradient-to-br from-blue-50 to-indigo-100">
+            <div class="slide-content">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800">Open Discussion</h2>
+                <p class="mt-4 text-xl md:text-2xl text-indigo-600">Let's talk through it and choose our path forward.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation -->
+    <footer class="mt-6 flex items-center justify-between w-full max-w-4xl">
+        <button id="prevBtn" class="bg-white text-indigo-600 font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            Previous
+        </button>
+        <span id="slideCounter" class="text-gray-600 text-sm font-medium"></span>
+        <button id="nextBtn" class="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+            Next
+        </button>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const slideCounter = document.getElementById('slideCounter');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                // Hide current slide
+                slides[currentSlide].classList.add('hidden');
+                
+                // Update current slide index
+                currentSlide = index;
+                
+                // Show new slide
+                slides[currentSlide].classList.remove('hidden');
+
+                // Update UI
+                updateUI();
+            }
+
+            function updateUI() {
+                // Update counter
+                slideCounter.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+
+                // Update button states
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === slides.length - 1;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1);
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < slides.length - 1) {
+                    showSlide(currentSlide + 1);
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'ArrowRight' && !nextBtn.disabled) {
+                   nextBtn.click();
+                } else if (e.key === 'ArrowLeft' && !prevBtn.disabled) {
+                   prevBtn.click();
+                }
+            });
+
+            // Initial setup
+            updateUI();
+        });
+    </script>
+</body>
+</html>

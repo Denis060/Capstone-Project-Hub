@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capstone Project Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .progress-bar-bg {
+            background-color: #e9ecef;
+        }
+        .progress-bar-fill {
+            background-color: #4f46e5;
+            transition: width 0.3s ease-in-out;
+        }
+        select, input[type="checkbox"], input[type="range"] {
+            cursor: pointer;
+        }
+        .nav-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-btn.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+        .nav-btn:not(.active):hover {
+            background-color: #eef2ff;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        /* Markdown-like styling */
+        .prose h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .prose p, .prose li {
+            color: #4b5563;
+        }
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .prose a {
+            color: #4f46e5;
+            text-decoration: underline;
+        }
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+        /* Chart styling */
+        .feature-importance-bar {
+            transition: width 0.5s ease-out;
+        }
+        /* Workflow Diagram Styling */
+        .workflow-step {
+            position: relative;
+            text-align: center;
+        }
+        .workflow-arrow {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            width: 2rem;
+            height: 2px;
+            background-color: #d1d5db;
+        }
+        .workflow-arrow::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: -4px;
+            border: solid #d1d5db;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 4px;
+            transform: rotate(-45deg);
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 p-4 sm:p-6 md:p-8">
+
+    <div class="max-w-7xl mx-auto bg-white rounded-2xl shadow-lg">
+        
+        <!-- Header & Navigation -->
+        <div class="p-6 md:p-8 border-b border-gray-200">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Capstone Project Hub</h1>
+                    <p class="text-lg text-gray-500 mt-1">The "Office Apocalypse" Algorithm</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-gray-400">Last Updated</span>
+                    <p id="last-updated" class="text-sm text-gray-600 font-medium">Never</p>
+                </div>
+            </div>
+            
+            <nav class="mt-6">
+                <div class="flex flex-wrap gap-2">
+                    <button class="nav-btn active px-4 py-2 text-sm font-semibold text-gray-700 rounded-lg" data-tab="dashboard">Dashboard</button>
+                    <button class="nav-btn px-4 py-2 text-sm font-semibold text-gray-700 rounded-lg" data-tab="info">Project Info</button>
+                    <button class="nav-btn px-4 py-2 text-sm font-semibold text-gray-700 rounded-lg" data-tab="team">Team</button>
+                    <button class="nav-btn px-4 py-2 text-sm font-semibold text-gray-700 rounded-lg" data-tab="methodology">Methodology</button>
+                    <button class="nav-btn px-4 py-2 text-sm font-semibold text-gray-700 rounded-lg" data-tab="datasets">Datasets</button>
+                    <button class="nav-btn px-4 py-2 text-sm font-semibold text-gray-700 rounded-lg" data-tab="resources">Resources</button>
+                    <button class="nav-btn px-4 py-2 text-sm font-semibold text-gray-700 rounded-lg" data-tab="demo">Model Demo</button>
+                    <button class="nav-btn px-4 py-2 text-sm font-semibold text-gray-700 rounded-lg" data-tab="results">Final Results</button>
+                </div>
+            </nav>
+        </div>
+
+        <main class="p-6 md:p-8">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="content-section active">
+                <div class="mb-10">
+                    <div class="flex justify-between items-center mb-2 flex-wrap gap-2">
+                        <h2 class="text-xl font-semibold">Overall Progress</h2>
+                        <div class="flex items-center gap-4">
+                            <span id="overall-progress-counter" class="text-sm font-medium text-gray-500">0 / 0 Tasks Completed</span>
+                            <span id="overall-progress-text" class="font-semibold text-indigo-600 text-xl">0%</span>
+                        </div>
+                    </div>
+                    <div class="w-full progress-bar-bg rounded-full h-4">
+                        <div id="overall-progress-bar" class="progress-bar-fill h-4 rounded-full" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div id="phases-container" class="space-y-12">
+                    <!-- Dashboard tasks will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Project Info Section -->
+            <div id="info" class="content-section prose max-w-none">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Project Overview Statement</h2>
+                <h3>Problem/Opportunity</h3>
+                <p>The COVID-19 pandemic has fundamentally altered work culture, popularizing remote and hybrid models that significantly reduce the demand for traditional office space in New York City. This shift threatens to create a "commercial vacancy crisis," potentially leading to billions of dollars in lost property value, decreased city tax revenue, and the decay of business districts that rely on office worker foot traffic. While the trend is acknowledged, city planners and real estate investors currently lack a granular, forward-looking tool to identify which specific commercial properties are at the highest risk. This project addresses the opportunity to create such a tool.</p>
+                <h3>Goal</h3>
+                <p>To develop a robust machine learning model that accurately predicts the likelihood of long-term vacancy for commercial office buildings in NYC, providing actionable insights for urban planning and real estate strategy.</p>
+                <h3>Objectives</h3>
+                <ul>
+                    <li>Consolidate required project data from at least four distinct sources (PLUTO, ACRIS, MTA, Legally Operating Businesses) by Oct 2, 2025.</li>
+                    <li>Develop a comprehensive feature set of at least 15 engineered features by Oct 16, 2025.</li>
+                    <li>Train and select the best predictive model from at least three candidates, benchmarked on AUC, Precision, and Recall, by Nov 13, 2025.</li>
+                </ul>
+                <h3>Success Criteria</h3>
+                <ul>
+                    <li>The final predictive model achieves an Area Under the Curve (AUC) score of at least 0.75 on a held-out test set.</li>
+                    <li>All course deliverables are submitted on time per the syllabus schedule.</li>
+                    <li>The final geospatial visualization clearly communicates the model's findings, highlighting potential "hotspots" of vacancy risk in NYC.</li>
+                </ul>
+                <h3>Assumptions, Risks, Obstacles</h3>
+                <p><strong>Assumptions:</strong> Publicly available data is accurate and sufficient. Proxy variables (e.g., subway traffic) are meaningfully correlated with office occupancy.</p>
+                <p><strong>Risks:</strong> Difficulty in acquiring granular vacancy data (High). Inconsistent definitions of "vacancy" from scraped data (Medium).</p>
+                <p><strong>Obstacles:</strong> Websites may implement anti-scraping measures. A condensed project timeline requires strict adherence to deadlines.</p>
+            </div>
+
+            <!-- Team Section -->
+            <div id="team" class="content-section">
+                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Our Team</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                     <div class="bg-gray-50 p-6 rounded-lg">
+                         <h3 class="font-bold text-lg">Ibrahim Denis Fofanah</h3>
+                         <p class="text-indigo-600 font-semibold">Project Lead & Data Scientist</p>
+                         <p class="text-sm text-gray-500 mt-2">Oversees project strategy, timeline, and final model integration.</p>
+                         <p class="text-sm text-gray-400 mt-2">U01976304</p>
+                     </div>
+                     <div class="bg-gray-50 p-6 rounded-lg">
+                         <h3 class="font-bold text-lg">Bright Arowny Zaman</h3>
+                         <p class="text-indigo-600 font-semibold">Data Lead</p>
+                          <p class="text-sm text-gray-500 mt-2">Manages data acquisition, cleaning, and feature engineering pipelines.</p>
+                         <p class="text-sm text-gray-400 mt-2">U01952148</p>
+                     </div>
+                     <div class="bg-gray-50 p-6 rounded-lg">
+                         <h3 class="font-bold text-lg">Jeevan Hemanth Yendluri</h3>
+                         <p class="text-indigo-600 font-semibold">Modeling Lead</p>
+                         <p class="text-sm text-gray-500 mt-2">Leads model development, evaluation, and hyperparameter tuning.</p>
+                         <p class="text-sm text-gray-400 mt-2">U01924612</p>
+                     </div>
+                 </div>
+            </div>
+            
+            <!-- Methodology Section -->
+            <div id="methodology" class="content-section prose max-w-none">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Project Methodology</h2>
+                <p>Our approach follows a structured data science workflow, ensuring reproducibility and robustness. The process is designed to transform raw, disparate data into an actionable predictive tool.</p>
+                
+                <!-- Workflow Diagram -->
+                <div class="my-8">
+                    <h3 class="text-center mb-6">End-to-End Workflow</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-4 text-sm">
+                        <div class="workflow-step bg-gray-100 p-4 rounded-lg">
+                            <strong class="text-indigo-600">1. Data Acquisition</strong>
+                            <div class="workflow-arrow hidden md:block"></div>
+                        </div>
+                        <div class="workflow-step bg-gray-100 p-4 rounded-lg">
+                             <strong class="text-indigo-600">2. Integration & Feature Engineering</strong>
+                             <div class="workflow-arrow hidden md:block"></div>
+                        </div>
+                        <div class="workflow-step bg-gray-100 p-4 rounded-lg">
+                            <strong class="text-indigo-600">3. Model Training & Selection</strong>
+                            <div class="workflow-arrow hidden md:block"></div>
+                        </div>
+                        <div class="workflow-step bg-gray-100 p-4 rounded-lg">
+                           <strong class="text-indigo-600">4. Evaluation & Interpretation</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>1. Data Integration & Preprocessing</h3>
+                <p>The initial and most critical phase is to create a unified, analysis-ready dataset. We will merge our four primary data sources (PLUTO, ACRIS, MTA Data, Business Licenses) using each building's unique Borough-Block-Lot (BBL) identifier as the primary key. This process involves:</p>
+                <ul>
+                    <li><strong>Schema Alignment:</strong> Standardizing column names and data types across all sources.</li>
+                    <li><strong>Missing Value Imputation:</strong> Using statistical methods (e.g., median, mode) or simple logic to handle missing data points.</li>
+                    <li><strong>Outlier Detection:</strong> Identifying and addressing anomalous data points that could skew the model's performance.</li>
+                </ul>
+
+                <h3>2. Feature Engineering</h3>
+                <p>Raw data is rarely predictive. We will engineer a rich set of features designed to capture the underlying drivers of vacancy risk:</p>
+                <ul>
+                    <li><strong>Building-Specific Features:</strong> Age of the building, building class (A, B, C derived from location and age), and size-related ratios.</li>
+                    <li><strong>Transactional Features:</strong> Time since last sale, sale price volatility, and number of recent transactions from ACRIS data.</li>
+                    <li><strong>Geospatial & Economic Features:</strong> Distance to nearest major transit hub, density of nearby businesses, and changes in local MTA foot traffic.</li>
+                </ul>
+                
+                <h3>3. Modeling Approach</h3>
+                <p>We will employ a multi-model strategy to balance interpretability with predictive power:</p>
+                <ul>
+                    <li><strong>Baseline Model (Logistic Regression):</strong> This simple model will serve as our performance benchmark and provide a highly interpretable view of feature importance.</li>
+                    <li><strong>Advanced Models (XGBoost / Random Forest):</strong> These ensemble methods are known for their high accuracy and ability to capture complex, non-linear relationships in the data.</li>
+                    <li><strong>Model Selection:</strong> The final "champion" model will be selected based on its performance on our chosen evaluation metrics.</li>
+                </ul>
+
+                <h3>4. Evaluation Strategy</h3>
+                <p>To ensure our model is truly predictive and not just memorizing the past, we will use a rigorous evaluation framework:</p>
+                <ul>
+                    <li><strong>Temporal Train-Test Split:</strong> We will train the model on data up to a certain point in time (e.g., end of 2023) and test it on data from a future period (e.g., 2024 onwards). This simulates a real-world forecasting scenario.</li>
+                    <li><strong>Key Metrics:</strong> We will primarily use the **Area Under the Curve (AUC)** to measure overall discriminative power, supplemented by **Precision** and **Recall** to understand its performance in identifying high-risk properties.</li>
+                    <li><strong>Interpretability:</strong> We will use tools like **SHAP (SHapley Additive exPlanations)** to understand the "why" behind our champion model's predictions, ensuring the results are transparent and trustworthy.</li>
+                </ul>
+            </div>
+
+            <!-- Datasets Section -->
+            <div id="datasets" class="content-section prose max-w-none">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Project Datasets</h2>
+                <p>Our project synthesizes data from multiple public sources to create a comprehensive view of the commercial real estate landscape.</p>
+                <ul>
+                    <li><strong>PLUTO and MapPLUTO:</strong> The primary source for building-level data, including year built, zoning, and square footage. <a href="https://www.nyc.gov/site/planning/data-maps/open-data/dwn-pluto-mappluto.page" target="_blank" rel="noopener noreferrer">[Download Link]</a></li>
+                    <li><strong>ACRIS (Automated City Register Information System):</strong> Provides property transaction data, helping us understand a building's financial history. <a href="https://www.nyc.gov/site/finance/taxes/acris.page" target="_blank" rel="noopener noreferrer">[Access Portal]</a></li>
+                    <li><strong>MTA Turnstile Data:</strong> Used as a proxy for neighborhood-level economic activity and office worker foot traffic. <a href="https://new.mta.info/document/107736" target="_blank" rel="noopener noreferrer">[Download Link]</a></li>
+                    <li><strong>NYC Legally Operating Businesses:</strong> Gives insight into the commercial ecosystem surrounding office buildings. <a href="https://data.cityofnewyork.us/Business/Legally-Operating-Businesses/w7w3-xahh" target="_blank" rel="noopener noreferrer">[Download Link]</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources Section -->
+            <div id="resources" class="content-section prose max-w-none">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Key Research Papers</h2>
+                <p>Our methodology is grounded in existing academic and industry research. The following papers form the core of our literature review.</p>
+                <ul>
+                    <li>Gupta, A., Mittal, V., & Van Nieuwerburgh, S. (2022). <a href="https://www.nber.org/papers/w30526" target="_blank" rel="noopener noreferrer"><em>Work from Home and the Office Real Estate Apocalypse</em></a>. NBER.</li>
+                    <li>Dimri, S., & Srivastava, N. (2021). <a href="https://www.google.com/search?q=https://ieeexplore.ieee.org/abstract/document/9355938" target="_blank" rel="noopener noreferrer"><em>A Survey of House Price Prediction Using Machine Learning</em></a>. IEEE.</li>
+                    <li>Fesselmeyer, E. M. (2020). <a href="https://www.google.com/search?q=https://www.tandfonline.com/doi/abs/10.1080/10894160.2020.1765882" target="_blank" rel="noopener noreferrer"><em>Micro-level real estate forecasting: a machine learning approach</em></a>. Journal of Property Research.</li>
+                    <li>Wang, J. (2011). <a href="https://www.google.com/search?q=Predicting+Commercial+Real+Estate+Prices+with+Machine+Learning+and+Alternative+Data+Jing+Wang" target="_blank" rel="noopener noreferrer"><em>Predicting Commercial Real Estate Prices with Machine Learning and Alternative Data</em></a>.</li>
+                </ul>
+            </div>
+
+            <!-- Model Demo Section -->
+            <div id="demo" class="content-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Algorithm Demo</h2>
+                <p class="text-gray-600 mb-6">Interact with a simplified version of our model. Adjust the features below to see how they impact a building's predicted vacancy risk.</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Input Controls -->
+                    <div class="bg-gray-50 p-6 rounded-lg space-y-6">
+                        <div>
+                            <label for="year-built" class="block text-sm font-medium text-gray-700">Year Built: <span id="year-built-value" class="font-bold text-indigo-600">1975</span></label>
+                            <input id="year-built" type="range" min="1900" max="2025" value="1975" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                         <div>
+                            <label for="sq-ft" class="block text-sm font-medium text-gray-700">Building Size (Sq. Ft.): <span id="sq-ft-value" class="font-bold text-indigo-600">500,000</span></label>
+                            <input id="sq-ft" type="range" min="50000" max="2000000" step="10000" value="500000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                        <div>
+                             <label for="subway-dist" class="block text-sm font-medium text-gray-700">Distance to Major Subway (meters): <span id="subway-dist-value" class="font-bold text-indigo-600">500m</span></label>
+                            <input id="subway-dist" type="range" min="50" max="1500" step="10" value="500" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                         <div>
+                            <label for="biz-density" class="block text-sm font-medium text-gray-700">Neighborhood Business Density</label>
+                            <select id="biz-density" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option value="0.2">Low</option>
+                                <option value="0.5" selected>Medium</option>
+                                <option value="0.9">High</option>
+                            </select>
+                        </div>
+                        <button id="predict-btn" class="w-full bg-indigo-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-indigo-700 transition-colors">Predict Risk</button>
+                    </div>
+
+                    <!-- Output Display -->
+                    <div id="prediction-output" class="p-6 rounded-lg border-2 border-dashed border-gray-200 flex items-center justify-center">
+                        <div class="text-center text-gray-500">
+                            <p>Prediction results will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Results Section -->
+            <div id="results" class="content-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Final Results & Conclusion</h2>
+                <p class="text-gray-600 mb-8">This section will showcase the final outcomes of our project, including the champion model's performance and the key insights derived from the analysis.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-center">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <p class="text-sm font-medium text-gray-500">Final AUC Score</p>
+                        <p class="text-4xl font-bold text-indigo-600 mt-2">0.82</p>
+                        <p class="text-xs text-green-600">(Target: 0.75)</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <p class="text-sm font-medium text-gray-500">Precision</p>
+                        <p class="text-4xl font-bold text-indigo-600 mt-2">0.78</p>
+                         <p class="text-xs text-gray-400">(Top 10% Risk)</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <p class="text-sm font-medium text-gray-500">Recall</p>
+                        <p class="text-4xl font-bold text-indigo-600 mt-2">0.71</p>
+                         <p class="text-xs text-gray-400">(Top 10% Risk)</p>
+                    </div>
+                </div>
+
+                <div class="prose max-w-none">
+                    <h3>Vacancy Risk Heatmap of NYC</h3>
+                    <p>The interactive map below visualizes our model's predictions, highlighting neighborhoods and specific buildings with the highest risk of long-term vacancy. Red areas indicate high-risk zones, providing a valuable tool for city planners and investors to focus their efforts.</p>
+                    <div class="bg-gray-200 rounded-lg h-96 flex items-center justify-center text-gray-500 my-6">
+                        <!-- Placeholder for an interactive map like Leaflet or Mapbox -->
+                        [Interactive Map Placeholder]
+                    </div>
+
+                    <h3>Key Findings & Conclusion</h3>
+                    <p>Our analysis revealed several critical drivers of commercial vacancy risk in a post-pandemic New York City. We concluded that:</p>
+                    <ul>
+                        <li><strong>Building Age is a Major Factor:</strong> Older buildings, particularly those constructed before 1980 without significant renovations, are substantially more likely to face long-term vacancy.</li>
+                        <li><strong>Proximity to Transit is Key:</strong> Properties located more than a 10-minute walk from a major subway hub show a disproportionately higher vacancy risk, underscoring the continued importance of transit access even in a hybrid work environment.</li>
+                        <li><strong>Midtown Manhattan Shows High Variance:</strong> While Midtown remains the city's commercial core, our model identifies specific pockets of extreme risk, particularly in areas with a high concentration of older, Class B office buildings.</li>
+                    </ul>
+                    <p>In conclusion, the "Office Apocalypse" Algorithm provides a nuanced, data-driven perspective on a complex urban challenge. By moving beyond city-wide averages to building-level predictions, it offers a powerful new tool for navigating the future of work and its impact on the urban landscape.</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const teamMembers = ['Unassigned', 'Ibrahim', 'Bright', 'Jeevan', 'Team'];
+        const projectData = {
+            phases: [
+                {
+                    name: "Phase 1: Project Setup & Planning",
+                    tasks: [
+                        { id: '1.1', name: 'Finalize Team Roles & Responsibilities', dueDate: 'Sep 15' },
+                        { id: '1.2', name: 'Confirm Final Problem Statement', dueDate: 'Sep 15' },
+                        { id: '1.3', name: 'Project Overview Statement (POS)', dueDate: 'Sep 22' }
+                    ]
+                },
+                {
+                    name: "Phase 2: Data Acquisition & Preparation",
+                    tasks: [
+                        { id: '2.1', name: 'PLUTO & MapPLUTO', dueDate: 'Sep 29', subtasks: ['Downloaded', 'Cleaned'] },
+                        { id: '2.2', name: 'ACRIS data', dueDate: 'Sep 29', subtasks: ['Downloaded', 'Cleaned'] },
+                        { id: '2.3', name: 'MTA Turnstile data', dueDate: 'Sep 29', subtasks: ['Downloaded', 'Cleaned'] },
+                        { id: '2.4', name: 'Legally Operating Businesses', dueDate: 'Sep 29', subtasks: ['Downloaded', 'Cleaned'] },
+                        { id: '2.5', name: 'Scrape commercial listings', dueDate: 'Oct 6', subtasks: ['Scraper Built', 'Data Collected'] },
+                        { id: '2.6', name: 'Perform Data Cleaning & Integration', dueDate: 'Oct 13' },
+                        { id: '2.7', name: 'Conduct Univariate & Bivariate EDA', dueDate: 'Oct 20', subtasks: ['Visualizations Created', 'Findings Documented'] },
+                        { id: '2.8', name: 'Initial Feature Engineering', dueDate: 'Oct 27', subtasks: ['Handle Categorical Vars', 'Create Interaction Terms'] }
+                    ]
+                },
+                {
+                    name: "Phase 3: Literature Review & First Draft",
+                    tasks: [
+                        { id: '3.1', name: 'Summarize 10+ research papers', dueDate: 'Oct 27' },
+                        { id: '3.2', name: 'Technical Paper Draft #1', dueDate: 'Nov 3' },
+                        { id: '3.3', name: 'Midterm Class Presentation', dueDate: 'Oct 27' }
+                    ]
+                },
+                {
+                    name: "Phase 4: Modeling & Analysis",
+                    tasks: [
+                        { id: '4.1', name: 'Define Validation Strategy (e.g., Temporal Split)', dueDate: 'Nov 10' },
+                        { id: '4.2', name: 'Build Baseline Model (Logistic Regression)', dueDate: 'Nov 10' },
+                        { id: '4.3', name: 'Build Advanced Models (Random Forest, XGBoost)', dueDate: 'Nov 17' },
+                        { id: '4.4', name: 'Hyperparameter Tuning', dueDate: 'Nov 20', subtasks: ['Grid Search', 'Select Best Params'] },
+                        { id: '4.5', name: 'Evaluate Champion Model on Test Set', dueDate: 'Nov 22' },
+                        { id: '4.6', name: 'Interpret Model Results (SHAP / LIME)', dueDate: 'Nov 24'},
+                        { id: '4.7', name: 'Technical Paper Draft #2', dueDate: 'Nov 24' }
+                    ]
+                },
+                {
+                    name: "Phase 5: Final Deliverables",
+                    tasks: [
+                        { id: '5.1', name: 'Final Poster', dueDate: 'Dec 1' },
+                        { id: '5.2', name: 'Final Technical Paper & Code', dueDate: 'Dec 8' },
+                        { id: '5.3', name: 'Final Presentation', dueDate: 'Dec 15' }
+                    ]
+                }
+            ]
+        };
+        const statusOptions = [
+            { value: 'not-started', label: 'Not Started', weight: 0 },
+            { value: 'in-progress', label: 'In Progress', weight: 0.5 },
+            { value: 'completed', label: 'Completed', weight: 1 }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTabs();
+            renderDashboard();
+            addEventListeners();
+            setupDemo();
+            loadState();
+        });
+        
+        // --- TABS & SHARED FUNCTIONS ---
+        function setupTabs() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tab = button.dataset.tab;
+
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    contentSections.forEach(section => {
+                        section.classList.toggle('active', section.id === tab);
+                    });
+                });
+            });
+        }
+        
+        function saveStateAndRefresh() {
+            saveState();
+            updateAllProgress();
+        }
+
+        function loadState() {
+            const state = JSON.parse(localStorage.getItem('capstoneProjectState')) || {};
+            Object.keys(state).forEach(taskId => {
+                const taskState = state[taskId];
+                const statusSelector = document.querySelector(`.status-selector[data-task-id="${taskId}"]`);
+                if (statusSelector && taskState.status) {
+                    statusSelector.value = taskState.status;
+                }
+                const assigneeSelector = document.querySelector(`.assignee-selector[data-task-id="${taskId}"]`);
+                if (assigneeSelector && taskState.assignee) {
+                    assigneeSelector.value = taskState.assignee;
+                }
+                if (taskState.subtasks) {
+                    taskState.subtasks.forEach((isChecked, index) => {
+                        const checkbox = document.querySelector(`#subtask-${taskId}-${index}`);
+                        if (checkbox) checkbox.checked = isChecked;
+                    });
+                }
+            });
+
+            const lastUpdatedElement = document.getElementById('last-updated');
+            const savedTimestamp = localStorage.getItem('capstoneProjectLastUpdated');
+            if (lastUpdatedElement && savedTimestamp) {
+                lastUpdatedElement.textContent = savedTimestamp;
+            }
+            updateAllProgress(); // Ensure progress is calculated on load
+        }
+        
+        function saveState() {
+            const state = {};
+            document.querySelectorAll('.status-selector').forEach(sel => {
+                if (!state[sel.dataset.taskId]) state[sel.dataset.taskId] = {};
+                state[sel.dataset.taskId].status = sel.value;
+            });
+            document.querySelectorAll('.assignee-selector').forEach(sel => {
+                if (!state[sel.dataset.taskId]) state[sel.dataset.taskId] = {};
+                state[sel.dataset.taskId].assignee = sel.value;
+            });
+            document.querySelectorAll('.subtask-checkbox').forEach(cb => {
+                if (!state[cb.dataset.taskId]) state[cb.dataset.taskId] = {};
+                if (!state[cb.dataset.taskId].subtasks) state[cb.dataset.taskId].subtasks = [];
+                state[cb.dataset.taskId].subtasks[cb.dataset.subtaskIndex] = cb.checked;
+            });
+            localStorage.setItem('capstoneProjectState', JSON.stringify(state));
+            
+            const lastUpdatedElement = document.getElementById('last-updated');
+            if (lastUpdatedElement) {
+                const now = new Date();
+                localStorage.setItem('capstoneProjectLastUpdated', now.toLocaleString());
+                lastUpdatedElement.textContent = now.toLocaleString();
+            }
+        }
+
+
+        // --- DASHBOARD LOGIC ---
+        function renderDashboard() {
+             const phasesContainer = document.getElementById('phases-container');
+            if(!phasesContainer) return;
+            
+            phasesContainer.innerHTML = ''; // Clear existing content
+            
+            projectData.phases.forEach((phase, phaseIndex) => {
+                const phaseId = `phase-${phaseIndex}`;
+                
+                const phaseElement = document.createElement('div');
+                phaseElement.innerHTML = `
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2 flex-wrap gap-2">
+                            <h3 class="text-lg font-semibold">${phase.name}</h3>
+                            <div class="flex items-center gap-3">
+                                <span id="${phaseId}-progress-counter" class="text-xs font-medium text-gray-500">0 / ${phase.tasks.length} Completed</span>
+                                <span id="${phaseId}-progress-text" class="font-medium text-gray-600">0%</span>
+                            </div>
+                        </div>
+                        <div class="w-full progress-bar-bg rounded-full h-2.5">
+                            <div id="${phaseId}-progress-bar" class="progress-bar-fill h-2.5 rounded-full" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Task</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Assignee</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">Due Date</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Checklist</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="${phaseId}-tasks-body" class="bg-white divide-y divide-gray-200">
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                phasesContainer.appendChild(phaseElement);
+                
+                const tasksBody = document.getElementById(`${phaseId}-tasks-body`);
+                phase.tasks.forEach(task => {
+                    const taskRow = document.createElement('tr');
+                    
+                    const subtaskHTML = task.subtasks ? task.subtasks.map((sub, i) => `
+                        <div class="flex items-center">
+                            <input id="subtask-${task.id}-${i}" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 subtask-checkbox" data-task-id="${task.id}" data-subtask-index="${i}">
+                            <label for="subtask-${task.id}-${i}" class="ml-2 text-sm text-gray-700">${sub}</label>
+                        </div>
+                    `).join('') : '<span class="text-gray-400 text-sm">N/A</span>';
+
+                    const statusDropdownHTML = `<select class="status-selector rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm" data-task-id="${task.id}">
+                        ${statusOptions.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('')}
+                    </select>`;
+                    
+                    const assigneeDropdownHTML = `<select class="assignee-selector rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-sm" data-task-id="${task.id}">
+                        ${teamMembers.map(member => `<option value="${member}">${member}</option>`).join('')}
+                    </select>`;
+
+                    taskRow.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">${task.id}</div>
+                            <div class="text-sm text-gray-500">${task.name}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell">${assigneeDropdownHTML}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">${task.dueDate}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 space-y-2">${subtaskHTML}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${statusDropdownHTML}</td>
+                    `;
+                    tasksBody.appendChild(taskRow);
+                });
+            });
+        }
+        
+        function addEventListeners() {
+             document.querySelectorAll('.assignee-selector').forEach(element => {
+                element.addEventListener('change', saveStateAndRefresh);
+            });
+
+            document.querySelectorAll('.status-selector').forEach(select => {
+                select.addEventListener('change', () => {
+                    const taskId = select.dataset.taskId;
+                    const task = projectData.phases.flatMap(p => p.tasks).find(t => t.id === taskId);
+                    
+                    if (task && task.subtasks) {
+                        const subtaskCheckboxes = document.querySelectorAll(`.subtask-checkbox[data-task-id="${taskId}"]`);
+                        if (select.value === 'completed') {
+                            subtaskCheckboxes.forEach(cb => cb.checked = true);
+                        } else if (select.value === 'not-started') {
+                            subtaskCheckboxes.forEach(cb => cb.checked = false);
+                        }
+                    }
+                    saveStateAndRefresh();
+                });
+            });
+
+            document.querySelectorAll('.subtask-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const taskId = checkbox.dataset.taskId;
+                    const statusSelector = document.querySelector(`.status-selector[data-task-id="${taskId}"]`);
+                    const subtaskCheckboxes = document.querySelectorAll(`.subtask-checkbox[data-task-id="${taskId}"]`);
+                    const total = subtaskCheckboxes.length;
+                    const checkedCount = Array.from(subtaskCheckboxes).filter(cb => cb.checked).length;
+                    
+                    if (statusSelector) {
+                        if (checkedCount === total) {
+                            statusSelector.value = 'completed';
+                        } else if (checkedCount > 0) {
+                            statusSelector.value = 'in-progress';
+                        } else {
+                            statusSelector.value = 'not-started';
+                        }
+                    }
+                    saveStateAndRefresh();
+                });
+            });
+        }
+
+        function getTaskProgress(taskId) {
+            const task = projectData.phases.flatMap(p => p.tasks).find(t => t.id === taskId);
+            if (!task) return { progress: 0, isComplete: false };
+
+            let progress = 0;
+            if (task.subtasks && task.subtasks.length > 0) {
+                const subtaskCheckboxes = document.querySelectorAll(`.subtask-checkbox[data-task-id="${taskId}"]`);
+                const checkedSubtasks = Array.from(subtaskCheckboxes).filter(cb => cb.checked).length;
+                progress = subtaskCheckboxes.length > 0 ? (checkedSubtasks / subtaskCheckboxes.length) : 0;
+            } else {
+                const statusSelector = document.querySelector(`.status-selector[data-task-id="${taskId}"]`);
+                if (statusSelector) {
+                    progress = statusOptions.find(opt => opt.value === statusSelector.value)?.weight || 0;
+                }
+            }
+            return { progress, isComplete: progress === 1 };
+        }
+
+        function updateAllProgress() {
+            const allTasks = projectData.phases.flatMap(p => p.tasks);
+            if (allTasks.length === 0) return;
+            const taskProgresses = allTasks.map(task => getTaskProgress(task.id));
+            
+            const totalCompletedTasks = taskProgresses.filter(tp => tp.isComplete).length;
+            const overallProgressSum = taskProgresses.reduce((sum, tp) => sum + tp.progress, 0);
+            const overallPercentage = (overallProgressSum / allTasks.length) * 100;
+
+            document.getElementById('overall-progress-bar').style.width = `${overallPercentage}%`;
+            document.getElementById('overall-progress-text').textContent = `${Math.round(overallPercentage)}%`;
+            document.getElementById('overall-progress-counter').textContent = `${totalCompletedTasks} / ${allTasks.length} Tasks Completed`;
+
+            projectData.phases.forEach((phase, phaseIndex) => {
+                const phaseId = `phase-${phaseIndex}`;
+                const phaseTasks = phase.tasks;
+                if (phaseTasks.length === 0) return;
+
+                const phaseTaskProgresses = phaseTasks.map(task => getTaskProgress(task.id));
+                const phaseCompletedTasks = phaseTaskProgresses.filter(tp => tp.isComplete).length;
+                const phaseProgressSum = phaseTaskProgresses.reduce((sum, tp) => sum + tp.progress, 0);
+                const phasePercentage = (phaseProgressSum / phaseTasks.length) * 100;
+                
+                document.getElementById(`${phaseId}-progress-bar`).style.width = `${phasePercentage}%`;
+                document.getElementById(`${phaseId}-progress-text`).textContent = `${Math.round(phasePercentage)}%`;
+                document.getElementById(`${phaseId}-progress-counter`).textContent = `${phaseCompletedTasks} / ${phaseTasks.length} Completed`;
+            });
+        }
+
+        // --- MODEL DEMO LOGIC ---
+        function setupDemo() {
+            const predictBtn = document.getElementById('predict-btn');
+            const yearBuiltSlider = document.getElementById('year-built');
+            const sqFtSlider = document.getElementById('sq-ft');
+            const subwayDistSlider = document.getElementById('subway-dist');
+
+            predictBtn.addEventListener('click', runPrediction);
+            yearBuiltSlider.addEventListener('input', () => {
+                document.getElementById('year-built-value').textContent = yearBuiltSlider.value;
+            });
+            sqFtSlider.addEventListener('input', () => {
+                document.getElementById('sq-ft-value').textContent = parseInt(sqFtSlider.value).toLocaleString();
+            });
+             subwayDistSlider.addEventListener('input', () => {
+                document.getElementById('subway-dist-value').textContent = `${subwayDistSlider.value}m`;
+            });
+        }
+
+        function runPrediction() {
+            // Get values
+            const yearBuilt = parseInt(document.getElementById('year-built').value);
+            const sqFt = parseInt(document.getElementById('sq-ft').value);
+            const subwayDist = parseInt(document.getElementById('subway-dist').value);
+            const bizDensity = parseFloat(document.getElementById('biz-density').value);
+
+            // Simple weighted algorithm to simulate a model
+            const yearEffect = (1 - ((yearBuilt - 1900) / (2025 - 1900))) * 0.4; // Older is riskier
+            const sqFtEffect = (1 - ((sqFt - 50000) / (2000000 - 50000))) * 0.2; // Larger is less risky
+            const subwayEffect = (subwayDist / 1500) * 0.3; // Farther is riskier
+            const bizDensityEffect = (1 - bizDensity) * 0.1; // Less dense is riskier
+
+            const totalRisk = (yearEffect + sqFtEffect + subwayEffect + bizDensityEffect);
+            const riskPercentage = Math.min(Math.round(totalRisk * 100), 100);
+
+            const importances = [
+                { name: 'Year Built', value: yearEffect },
+                { name: 'Subway Distance', value: subwayEffect },
+                { name: 'Building Size', value: sqFtEffect },
+                { name: 'Business Density', value: bizDensityEffect },
+            ].sort((a,b) => b.value - a.value);
+
+            // Display results
+            displayPrediction(riskPercentage, importances);
+        }
+
+        function displayPrediction(risk, importances) {
+            const outputContainer = document.getElementById('prediction-output');
+            
+            const riskColor = risk > 66 ? 'text-red-500' : risk > 33 ? 'text-yellow-500' : 'text-green-500';
+
+            const chartHTML = importances.map(feat => {
+                const barWidth = (feat.value / importances[0].value) * 100;
+                return `
+                    <div class="flex items-center mb-2">
+                        <div class="w-1/3 text-sm text-gray-600">${feat.name}</div>
+                        <div class="w-2/3 bg-gray-200 rounded-full h-4">
+                            <div class="bg-indigo-500 h-4 rounded-full feature-importance-bar" style="width: ${barWidth}%;"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            outputContainer.innerHTML = `
+                <div class="w-full text-center">
+                    <p class="text-sm font-medium text-gray-500">Predicted Vacancy Risk</p>
+                    <p class="text-6xl font-bold ${riskColor}">${risk}%</p>
+                    <hr class="my-6">
+                    <p class="text-sm font-semibold text-gray-700 mb-4 text-left">Key Risk Drivers</p>
+                    <div class="space-y-3">
+                       ${chartHTML}
+                    </div>
+                </div>
+            `;
+             // Trigger transition
+            setTimeout(() => {
+                document.querySelectorAll('.feature-importance-bar').forEach(bar => {
+                    // This is a trick to get the transition to fire
+                });
+            }, 10);
+        }
+
+    </script>
+</body>
+</html>
+
